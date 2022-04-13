@@ -1,0 +1,12 @@
+D:\Microservices\Creating_Microservices\accounts\src\main\java\com\training\accounts\AccountsApplication.java
+D:\Microservices\Creating_Microservices\accounts\src\main\java\com\training\accounts\config\AccountsServiceConfig.java
+D:\Microservices\Creating_Microservices\accounts\src\main\java\com\training\accounts\model\PropertiesFromGitViaConfigServer.java
+D:\Microservices\Creating_Microservices\accounts\src\main\java\com\training\accounts\model\CardsModel.java
+D:\Microservices\Creating_Microservices\accounts\src\main\java\com\training\accounts\service\client\LoansFeignClient.java
+D:\Microservices\Creating_Microservices\accounts\src\main\java\com\training\accounts\model\AccountsModel.java
+D:\Microservices\Creating_Microservices\accounts\src\main\java\com\training\accounts\controller\AccountsController.java
+D:\Microservices\Creating_Microservices\accounts\src\main\java\com\training\accounts\model\CustomerDetails.java
+D:\Microservices\Creating_Microservices\accounts\src\main\java\com\training\accounts\model\LoansModel.java
+D:\Microservices\Creating_Microservices\accounts\src\main\java\com\training\accounts\service\client\CardsFeignClient.java
+D:\Microservices\Creating_Microservices\accounts\src\main\java\com\training\accounts\model\Customer.java
+D:\Microservices\Creating_Microservices\accounts\src\main\java\com\training\accounts\repo\AccountsRepository.java
