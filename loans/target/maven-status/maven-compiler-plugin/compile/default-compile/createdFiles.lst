@@ -1,0 +1,8 @@
+com\training\loans\config\LoansServiceConfig.class
+com\training\loans\LoansApplication.class
+com\training\loans\model\LoansModel.class
+com\training\loans\controller\LoansController.class
+com\training\loans\model\LoansPropertiesFromGit.class
+META-INF\spring-configuration-metadata.json
+com\training\loans\repo\LoansRepository.class
+com\training\loans\model\Customer.class

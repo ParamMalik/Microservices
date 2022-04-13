@@ -1,0 +1,102 @@
+version: "3.8"
+services:
+  
+  configserver:
+    image: configserver:latest
+    mem_limit: 700m
+    ports:
+      - "1000:1000"
+     
+    networks:
+      - eazybank
+  
+  
+  eurekaserver:
+    image: eurekaserver:latest
+    mem_limit: 700m
+    ports:
+      - "8070:8070"
+    networks:
+      - eazybank
+    depends_on:
+      - configserver
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 15s
+        max_attempts: 3
+        window: 120s
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      SPRING_CONFIG_IMPORT: configserver:http://configserver:1000/        
+
+  
+  
+  accounts:
+    image: accounts:latest
+    mem_limit: 700m
+    ports:
+      - "8085:8080"
+    networks:
+      - eazybank
+    depends_on:
+      - configserver
+      - eurekaserver
+    deploy:                     # this is for accounts
+      restart_policy:
+        condition: on-failure
+        delay: 30s
+        max_attempts: 3
+        window: 120s
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      SPRING_CONFIG_IMPORT: configserver:http://configserver:1000/  
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eurekaserver:8070/eureka/        
+  
+  
+  loans:
+    image: loans:latest
+    mem_limit: 700m
+    ports:
+      - "8090:8080"
+    networks:
+      - eazybank
+    depends_on:
+      - configserver
+      - eurekaserver
+    deploy:                     # this is for accounts
+      restart_policy:
+        condition: on-failure
+        delay: 30s
+        max_attempts: 3
+        window: 120s
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      SPRING_CONFIG_IMPORT: configserver:http://configserver:1000/  
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eurekaserver:8070/eureka/             
+  
+  
+  cards:
+    image: cards:0.0.1-SNAPSHOT
+    mem_limit: 700m
+    ports:
+      - "9000:8080"  
+    networks:
+      - eazybank
+    depends_on:
+      - configserver
+      - eurekaserver
+    deploy:                     # this is for accounts
+      restart_policy:
+        condition: on-failure
+        delay: 30s
+        max_attempts: 3
+        window: 120s
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      SPRING_CONFIG_IMPORT: configserver:http://configserver:1000/  
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eurekaserver:8070/eureka/ 
+
+
+networks:
+  eazybank:                  

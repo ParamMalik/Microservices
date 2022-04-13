@@ -1,0 +1,8 @@
+com\training\cards\controller\CardsController.class
+com\training\cards\CardsApplication.class
+com\training\cards\model\CardPropertiesFromGitViaConfigServer.class
+com\training\cards\model\CardsModel.class
+com\training\cards\model\Customer.class
+META-INF\spring-configuration-metadata.json
+com\training\cards\config\CardsServiceConfig.class
+com\training\cards\repo\CardsRepository.class

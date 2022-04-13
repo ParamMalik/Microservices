@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.training.loans.LoansApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 24.504 s - in com.training.loans.LoansApplicationTests
