@@ -64,7 +64,7 @@ services:
     depends_on:
       - configserver
       - eurekaserver
-    deploy:                     # this is for accounts
+    deploy:                     # this is for loans
       restart_policy:
         condition: on-failure
         delay: 30s
@@ -86,7 +86,7 @@ services:
     depends_on:
       - configserver
       - eurekaserver
-    deploy:                     # this is for accounts
+    deploy:                     # this is for cards
       restart_policy:
         condition: on-failure
         delay: 30s
