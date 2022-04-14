@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.training.cards.CardsApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 18.342 s - in com.training.cards.CardsApplicationTests
