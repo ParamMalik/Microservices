@@ -15,6 +15,10 @@ public class CustomerDetails {
 	private List<LoansModel> loans;
 	private List<CardsModel> cards;
 
+	public CustomerDetails() {
+		super();
+	}
+
 	public CustomerDetails(AccountsModel accounts, List<LoansModel> loans, List<CardsModel> cards) {
 		this.accounts = accounts;
 		this.loans = loans;

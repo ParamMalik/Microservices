@@ -22,6 +22,10 @@ import com.training.accounts.repo.AccountsRepository;
 import com.training.accounts.service.client.CardsFeignClient;
 import com.training.accounts.service.client.LoansFeignClient;
 
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
+import io.github.resilience4j.retry.annotation.Retry;
+
 @RestController
 public class AccountsController {
 
@@ -37,9 +41,16 @@ public class AccountsController {
 	@Autowired
 	private LoansFeignClient loansFeignClient;
 
+	// Implementing RateLimiter Pattern
+
 	@GetMapping(path = "/status")
+	@RateLimiter(name = "getStatusLimiter", fallbackMethod = "getStatusFallBack")
 	public String getStatus() {
 		return "apis are up and running";
+	}
+
+	private String getStatusFallBack(Throwable t) {
+		return "This is getStatus Fall Back Mthod";
 	}
 
 	@PostMapping("/myAccounts")
@@ -78,7 +89,16 @@ public class AccountsController {
 
 	}
 
+	// This Is Circuit Breaker Pattern of Resilience4j
+
+	// We can provide custom configuration in property file for circuit breaker
+	// that after how many request it has to open and when(time) to half open when
+	// to open again.
+
 	@PostMapping(path = "/myCustomerDetails")
+//	@CircuitBreaker(name = "customerDetailsForBankApp", fallbackMethod = "customFallBackMethodForGetCustomerDetails")
+
+	@Retry(name = "retryForMyCustomerDetails", fallbackMethod = "customFallBackMethodForGetCustomerDetails")
 	public CustomerDetails getCustomerDetails(@RequestBody Customer customer) {
 		AccountsModel customerWithTheGivenId = accountsRepository.findByCustomerId(customer.getCustomerId());
 		List<LoansModel> loanDetails = loansFeignClient.getLoanDetails(customer);
@@ -88,4 +108,20 @@ public class AccountsController {
 		return customerDetails;
 
 	}
+
+	// There are some conditions for fall back method to follow
+	// fallBack method must accept the same parameters as the original method and it
+	// should also
+	// accept an object of Throwable as a parameter
+
+	private CustomerDetails customFallBackMethodForGetCustomerDetails(Customer customer, Throwable t) {
+		AccountsModel customerWithTheGivenId = accountsRepository.findByCustomerId(customer.getCustomerId());
+		List<LoansModel> loanDetails = loansFeignClient.getLoanDetails(customer);
+		CustomerDetails customerDetails = new CustomerDetails();
+		customerDetails.setAccounts(customerWithTheGivenId);
+		customerDetails.setLoans(loanDetails);
+
+		return customerDetails;
+	}
+
 }
