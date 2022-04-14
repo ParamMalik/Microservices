@@ -34,7 +34,7 @@ public class LoansController {
 	@PostMapping("/myLoans")
 	public List<LoansModel> getLoanDetails(@RequestBody Customer customerId) {
 		List<LoansModel> customerLoanDetailsByCustomerId = loansRepository.findByCustomerId(customerId.getCustomerId());
-
+		System.out.println("Invoking Loans Service Using Retry Patter");
 		return customerLoanDetailsByCustomerId;
 
 	}
