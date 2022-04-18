@@ -17,6 +17,9 @@ import com.training.loans.model.LoansModel;
 import com.training.loans.model.LoansPropertiesFromGit;
 import com.training.loans.repo.LoansRepository;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @RestController
 public class LoansController {
 
@@ -33,8 +36,10 @@ public class LoansController {
 
 	@PostMapping("/myLoans")
 	public List<LoansModel> getLoanDetails(@RequestBody Customer customerId) {
+		log.info("We are in getLoanDetails . Started");
 		List<LoansModel> customerLoanDetailsByCustomerId = loansRepository.findByCustomerId(customerId.getCustomerId());
 		System.out.println("Invoking Loans Service Using Retry Patter");
+		log.info("We are in getLoanDetails . Ended");
 		return customerLoanDetailsByCustomerId;
 
 	}

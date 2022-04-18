@@ -17,6 +17,9 @@ import com.training.cards.model.CardsModel;
 import com.training.cards.model.Customer;
 import com.training.cards.repo.CardsRepository;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @RestController
 public class CardsController {
 
@@ -33,8 +36,10 @@ public class CardsController {
 
 	@PostMapping("/myCards")
 	public List<CardsModel> getCardsDetails(@RequestBody Customer customerId) {
+		log.info("We are in getCardDetails . Started");
 		List<CardsModel> cusotmerCardDeatilsWithTheGivenCustomerId = cardsRepository
 				.findByCustomerId(customerId.getCustomerId());
+		log.info("We are in getCardDetails . Ended");
 
 		return cusotmerCardDeatilsWithTheGivenCustomerId;
 	}
@@ -56,6 +61,7 @@ public class CardsController {
 
 		String cardPropertiesFromGitViaConfigServerAsString = withDefaultPrettyPrinter
 				.writeValueAsString(cardPropertiesFromGitViaConfigServer);
+
 		return cardPropertiesFromGitViaConfigServerAsString;
 	}
 
